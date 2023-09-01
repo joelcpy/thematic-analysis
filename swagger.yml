@@ -8,6 +8,7 @@
           "post":
             {
               "summary": "Extract Theme",
+              "description": "Method extracts text from url, predicts theme of the content and saves down the url, text and theme \ninto a sqlite database\n\nArgs:\n- url: url of SEC filing\n# test_url = 'https://www.sec.gov/Archives/edgar/data/1267238/000126723822000006/aiz-20211231.htm'\n\nReturns: \n- { url, theme}",
               "operationId": "extract_theme_extract_theme__post",
               "parameters":
                 [
@@ -16,6 +17,74 @@
                     "schema": { "type": "string", "title": "Url" },
                     "name": "url",
                     "in": "query",
+                  },
+                ],
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "Successful Response",
+                      "content": { "application/json": { "schema": {} } },
+                    },
+                  "422":
+                    {
+                      "description": "Validation Error",
+                      "content":
+                        {
+                          "application/json":
+                            {
+                              "schema":
+                                {
+                                  "$ref": "#/components/schemas/HTTPValidationError",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      "/get-predicted-themes/":
+        {
+          "get":
+            {
+              "summary": "Get Predicted Themes",
+              "description": "Retrieve a list of all extracted themes from the database.\n\nReturns:\n- A list of themes stored in the database.",
+              "operationId": "get_predicted_themes_get_predicted_themes__get",
+              "responses":
+                {
+                  "200":
+                    {
+                      "description": "Successful Response",
+                      "content":
+                        {
+                          "application/json":
+                            {
+                              "schema":
+                                {
+                                  "items": {},
+                                  "type": "array",
+                                  "title": "Response Get Predicted Themes Get Predicted Themes  Get",
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      "/texts/{theme_name}/":
+        {
+          "get":
+            {
+              "summary": "Get Texts By Theme",
+              "description": "Retrieve a list of text associated with a specific theme.\n\nArgs:\n- theme_name (str): The theme to filter by.\n\nReturns:\n- ThemeList: A list of text bodies associated with the specified theme.",
+              "operationId": "get_texts_by_theme_texts__theme_name___get",
+              "parameters":
+                [
+                  {
+                    "required": true,
+                    "schema": { "type": "string", "title": "Theme Name" },
+                    "name": "theme_name",
+                    "in": "path",
                   },
                 ],
               "responses":

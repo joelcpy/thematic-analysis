@@ -42,7 +42,7 @@ init_db()
 @app.post("/extract-theme/")
 async def extract_theme(url: str):
     """ 
-    Method extracts text from url, predicts theme of the content and saves fown the url, text and theme 
+    Method extracts text from url, predicts theme of the content and saves down the url, text and theme 
     into a sqlite database
 
     Args:
