@@ -3,6 +3,30 @@
 
 This project uses Latent Dirichlet Allocation (LDA) to extract themes from SEC filings. The model is deployed as an API service using FastAPI, allowing users to easily extract and query themes from given URLs.
 
+## 🚀 Setup
+Please see below analysis section for basic API details and swagger.yml for spec. 
+
+1.  **Clone the repository**:
+
+```    
+git clone https://github.com/joelcpy/thematic-analysis.git
+cd thematic-analysis
+``` 
+
+2.  **Build the Docker container**:
+    
+```
+docker build -t theme-extractor . 
+```
+    
+    
+3.  **Run the Docker container**:
+    
+```
+docker run -p 8000:8000 theme-extractor
+```
+    
+
 ## Analysis Findings
 ### 1. Common topics
 0. **Employee Programs and Support**
