@@ -79,12 +79,16 @@ async def get_predicted_themes() -> list:
     Returns:
     - A list of themes stored in the database.
     """
-    with sqlite3.connect(DATABASE) as conn:
-        cursor = conn.cursor()
-        rows = cursor.execute("SELECT theme FROM themes").fetchall()
-        themes = [row[0] for row in rows]
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            rows = cursor.execute("SELECT theme FROM themes").fetchall()
+            themes = [row[0] for row in rows]
 
-    return themes
+        return themes
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/texts/{theme_name}/")
 async def get_texts_by_theme(theme_name: str):
@@ -97,11 +101,15 @@ async def get_texts_by_theme(theme_name: str):
     Returns:
     - ThemeList: A list of text bodies associated with the specified theme.
     """
-    with sqlite3.connect(DATABASE) as conn:
-        cursor = conn.cursor()
-        rows = cursor.execute("SELECT url, text_body, theme FROM themes WHERE theme=?", (theme_name,)).fetchall()
-        themes = [{"url": row[0], "text_body": row[1][0:150] + " ...", "theme": row[2]} for row in rows]
-    return {"themes": themes}
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            rows = cursor.execute("SELECT url, text_body, theme FROM themes WHERE theme=?", (theme_name,)).fetchall()
+            themes = [{"url": row[0], "text_body": row[1][0:150] + " ...", "theme": row[2]} for row in rows]
+        return {"themes": themes}
+
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     
 
