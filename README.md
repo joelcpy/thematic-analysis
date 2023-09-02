@@ -3,6 +3,34 @@
 
 This project uses Latent Dirichlet Allocation (LDA) to extract themes from SEC filings. The model is deployed as an API service using FastAPI, allowing users to easily extract and query themes from given URLs.
 
+## Folder Structure
+thematic-analysis
+├── Dockerfile
+├── README.md
+├── environment.yml
+├── models
+│   ├── bigram_mod.pkl
+│   ├── lda_model
+│   ├── lda_model.expElogbeta.npy
+│   ├── lda_model.id2word
+│   └── lda_model.state
+├── plots
+│   ├── SentimentAnalysis.png
+│   ├── commonTopics_emerging.png
+│   ├── declining_trends.png
+│   └── emerging.png
+├── src
+
+│   ├── main.py
+│   ├── model.py
+│   ├── preprocessing.py
+│   ├── scraper.py
+│   ├── tests
+│   │   └── test_text_preprocessing.py
+│   └── themes.db
+├── swagger.yml
+├── thematic_analysis.ipynb
+
 ## 🚀 Setup
 Please see below analysis section for basic API details and swagger.yml for spec. 
 
