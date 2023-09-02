@@ -219,3 +219,11 @@ https://www.sec.gov/Archives/edgar/data/1267238/000126723822000006/aiz-20211231.
   ]
 }
 ```
+
+## Test
+```
+# change to src directory and execute the test scripts
+cd src
+python -m unittest tests/test_text_preprocessing.py
+```
+
